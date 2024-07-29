@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'dart:io';
 
 // Class decleration
 class Product{
@@ -33,15 +34,22 @@ class ProductManager {
     print('Product added');
   }
 
-  void editProduct(int index, {String? name, String? description, double? price}) {
+  void editProduct(int index) {
     if (index < 0 || index >= _products.length) {
       print('Invalid index');
     } else {
       var product = _products[index];
-      product.name = name;
-      product.description = description;
-      product.price = price;
+      print('Enter the new name:');
+      String? newName = stdin.readLineSync();
+      product.name = newName;
+      print('Enter the new description:');
+      String? newDescription = stdin.readLineSync();
+      product.description = newDescription;
+      print('Enter the new price:');
+      double? newPrice = double.parse(stdin.readLineSync()!);
+      product.price = newPrice;
       print('Product updated');
+
     }
   }
 
@@ -84,23 +92,60 @@ void main(){
   Strings = */
   var productManager = ProductManager();
 
-  var product1 = Product(name: 'Laptop', description: 'A high-end laptop', price: 1500.0);
-  // var product2 = Product(name: 'Smartphone', description: 'A new smartphone', price: 800.0);
+  while(true){
+    print('Welcome to e-commerce product manager');
+    print("-------Developed by @naty.w--------");
+    print("Choose a Function");
+    print('0. Add Product');
+    print('1. Edit Product');
+    print('2. View All Products');
+    print('3. View One Product');
+    print('4. Delete a Product');
+    print('9. Exit ');
 
-  productManager.addProduct(product1);
-  
+    int userChoice = int.parse(stdin.readLineSync()!);
 
-  productManager.viewAllProducts();
+    switch(userChoice){
+      case 0:
+        print('Enter the name:');
+        String? nxt = stdin.readLineSync();
+        print('Enter the description:');
+        String? nxdesc = stdin.readLineSync();
+        print('Enter the price:');
+        double? nxtprc = double.parse(stdin.readLineSync()!);
+
+        var prtd = Product(name: nxt, description: nxdesc, price: nxtprc);
+        productManager.addProduct(prtd);
+        break;
+      case 1:
+        print("Input ID Of Product:" );
+        int indx = int.parse(stdin.readLineSync()!);
+        productManager.editProduct(indx);
+      case 2:
+        print("Here Is All The Products: ");
+        productManager.viewAllProducts();
+        break;
+      case 3:
+        print("Enter ID of Product: ");
+        int indx = int.parse(stdin.readLineSync()!);
+        print("Here is the Requested Product:" );
+        productManager.viewProduct(indx);
+        break;
+      case 4:
+        print("Enter ID of Product: ");
+        int indx = int.parse(stdin.readLineSync()!);
+        productManager.deleteProduct(indx);
+      case 5:
+        return;
+      case 9:
+        exit(0);
+      default:
+        print("Invalid Choice");
+
+        
+    }
 
 
-  productManager.viewProduct(0);
 
-
-  productManager.editProduct(0, name: 'Gaming Laptop', price: 2000.0);
-
-  
-  productManager.deleteProduct(0);
-
-
-  productManager.viewAllProducts();
+  }
 }
