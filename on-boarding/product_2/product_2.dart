@@ -13,6 +13,8 @@ class Product{
     required this.price,
   });
 
+
+  // I have absolutly No idea what this is? It is called setter or getter i don't know
   @override
   String toString() {
     return 'Product(name: $name, description: $description, price: $price)';
