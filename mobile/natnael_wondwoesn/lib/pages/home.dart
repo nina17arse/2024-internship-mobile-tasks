@@ -27,16 +27,8 @@ class _homePageState extends State<homePage> {
           shape: CircleBorder(),
           backgroundColor: Color.fromARGB(255, 63, 81, 243),
           child: Icon(Icons.add_rounded,color: Colors.white,size: 55),
-          onPressed: (){Navigator.push(context, PageTransition(
-                    alignment: Alignment.bottomCenter,
-                        curve: Curves.easeInOut,
-                        duration: Duration(milliseconds: 600),
-                        reverseDuration: Duration(milliseconds: 400),
-                        type: PageTransitionType.rightToLeft,
-                        child: AddUpdate(), 
-                        childCurrent: homePage()
-                    
-                  ),);
+          // Named ROute Implementation
+          onPressed: (){Navigator.pushNamed(context, '/addUpdate');
 },
         
           ),

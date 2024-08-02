@@ -141,7 +141,7 @@ class _AddUpdateState extends State<AddUpdate> {
                                       foregroundColor: Colors.white,
                                       backgroundColor: Color(0xff3F51F3),
                                     ),
-                                  onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=> DetailsPage(),),);}, 
+                                  onPressed: (){Navigator.pushNamed(context, '/home');}, 
                                   child: Text("ADD",style: GoogleFonts.poppins(fontSize: 14,fontWeight: FontWeight.w500),)),
                                 ),
                   
@@ -158,7 +158,7 @@ class _AddUpdateState extends State<AddUpdate> {
                                     overlayColor: Colors.red,
                                     foregroundColor: Colors.red,
                                   ),
-                                  onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=> homePage(),),);},
+                                  onPressed: (){Navigator.pushNamed(context, '/home');},
                                   child: Text("Delete",style: GoogleFonts.poppins(fontSize: 14,fontWeight: FontWeight.w500))),
                               ),
                             ],

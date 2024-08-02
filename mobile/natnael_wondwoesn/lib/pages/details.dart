@@ -152,7 +152,7 @@ class _DetailsState extends State<DetailsPage> {
                             overlayColor: Colors.red,
                             foregroundColor: Colors.red,
                           ),
-                          onPressed: (){}, 
+                          onPressed: (){Navigator.pushNamed(context, '/home');}, 
                           child: Text("Delete",style: GoogleFonts.poppins(fontSize: 14,fontWeight: FontWeight.w500))),
                       ),
                         SizedBox(
