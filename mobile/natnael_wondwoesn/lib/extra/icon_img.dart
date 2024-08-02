@@ -3,39 +3,31 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
 
-class ImagePickerExample extends StatefulWidget {
+class ImagePickerIconButton extends StatefulWidget {
   @override
-  _ImagePickerExampleState createState() => _ImagePickerExampleState();
+  _ImagePickerIconButtonState createState() => _ImagePickerIconButtonState();
 }
 
-class _ImagePickerExampleState extends State<ImagePickerExample> {
+class _ImagePickerIconButtonState extends State<ImagePickerIconButton> {
   File? _image;
-  final ImagePicker _picker = ImagePicker();
 
   Future<void> _pickImage() async {
+    final ImagePicker _picker = ImagePicker();
     final XFile? pickedFile = await _picker.pickImage(source: ImageSource.gallery);
-
+    
     if (pickedFile != null) {
       setState(() {
         _image = File(pickedFile.path);
+        
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Image Picker Example'),
-      ),
-      body: Center(
-        child: _image == null
-            ? IconButton(
-                icon: Icon(Icons.add_a_photo, size: 50),
-                onPressed: _pickImage,
-              )
-            : Image.file(_image!),
-      ),
+    return IconButton(
+      icon: _image == null ? Icon(Icons.rectangle_rounded,size: 45.0,color: Color.fromARGB(255, 204, 204, 204),) : Image.file(_image!),
+      onPressed: _pickImage,
     );
   }
 }

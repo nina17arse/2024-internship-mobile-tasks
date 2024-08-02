@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
 import '../extra/resusetext.dart';
+import 'home.dart';
 
 
 
@@ -71,11 +72,15 @@ class _AddUpdateState extends State<AddUpdate> {
                       children: [
                          reusableTextpar("name", FontWeight.w500, 14),
                          SizedBox(height: 8,),
-                         const SizedBox(
+                          SizedBox(
                           height: 50,
                           width: 360,
                           child: TextField(
+                            maxLines: 4,
                             decoration: InputDecoration(
+                              
+                              border: InputBorder.none,
+                              
                               filled: true,fillColor: Color.fromRGBO(243, 243, 243, 1)
                             ),
                           )),
@@ -86,6 +91,7 @@ class _AddUpdateState extends State<AddUpdate> {
                           width: 360,
                           child: TextField(
                             decoration: InputDecoration(
+                              border: InputBorder.none,
                               filled: true,fillColor: Color.fromRGBO(243, 243, 243, 1)
                             ),
                           )),
@@ -96,6 +102,8 @@ class _AddUpdateState extends State<AddUpdate> {
                           width: 360,
                           child: TextField(
                             decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: "",
                               filled: true,fillColor: Color.fromRGBO(243, 243, 243, 1)
                             ),
                           )),
@@ -105,7 +113,9 @@ class _AddUpdateState extends State<AddUpdate> {
                           height: 150,
                           width: 360,
                           child: TextField(
+                            maxLines: 4,
                             decoration: InputDecoration(
+                              border: InputBorder.none,
                               filled: true,fillColor: Color.fromRGBO(243, 243, 243, 1)
                             ),
                           )),
@@ -147,7 +157,7 @@ class _AddUpdateState extends State<AddUpdate> {
                                     overlayColor: Colors.red,
                                     foregroundColor: Colors.red,
                                   ),
-                                  onPressed: (){}, 
+                                  onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=> homePage(),),);},
                                   child: Text("Delete",style: GoogleFonts.poppins(fontSize: 14,fontWeight: FontWeight.w500))),
                               ),
                             ],

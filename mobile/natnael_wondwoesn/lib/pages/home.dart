@@ -5,6 +5,7 @@ import 'package:flutter_application_5/pages/details.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'search.dart';
 import 'package:image_picker/image_picker.dart';
+import '../extra/icon_img.dart';
 
 
 class homePage extends StatefulWidget {
@@ -44,10 +45,22 @@ class _homePageState extends State<homePage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      Container(
+                        margin: EdgeInsets.only(top: 4),
+                        child: SizedBox(
+                          
+                          width: 80,
+                          height: 80,
+                          child: ImagePickerIconButton()),
+                      ),
 
-                        Icon(Icons.rectangle_rounded,size: 60.0,color: Color.fromARGB(255, 204, 204, 204),),
+                        // IconButton(
+                        //   onPressed: () {
+                        //     ImagePickerExample();
+                        //   },
+                        //   icon: Icon(Icons.rectangle_rounded,size: 45.0,color: Color.fromARGB(255, 204, 204, 204),)),
                         Container(
-                            padding: EdgeInsets.only(top: 5,left: 10),
+                            padding: EdgeInsets.only(top: 4,left: 10),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -63,7 +76,7 @@ class _homePageState extends State<homePage> {
 
 
                 Container(decoration: BoxDecoration(
-                          border: Border.all(color: Color.fromRGBO(221, 221, 221, 1),width: 5),
+                          border: Border.all(color: Color.fromRGBO(221, 221, 221, 1),width: 2),
                           borderRadius: BorderRadius.circular(9)
                         ),child: Image(
                           width: 40,
@@ -71,13 +84,8 @@ class _homePageState extends State<homePage> {
                           image: AssetImage('assets/icons8-notification-bell-24.png')))],
               ),
 
-
-            const SizedBox(
-              height: 10,
-            ),
-
-
             Container(
+              height: MediaQuery.of(context).size.height*0.052,
                child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -93,19 +101,21 @@ class _homePageState extends State<homePage> {
                 ),
             ),
             // Products
-          
-            SizedBox(
-                height: 661,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: 3, 
-                  itemBuilder: (context,idx)=> GestureDetector(
-                    onTap: (){Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=> DetailsPage(),),);},
-                    
-                    
-                    child: shoeCard(),
-                  )),
-              ),
+          SizedBox(
+            height: 11,
+          ),
+            SingleChildScrollView(
+              child: SizedBox(
+                  height: MediaQuery.of(context).size.height*0.8,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: 3, 
+                    itemBuilder: (context,idx)=> GestureDetector(
+                      onTap: (){Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=> DetailsPage(),),);},
+                      child: shoeCard(),
+                    )),
+                ),
+            ),
              
             //  Button Blue
             
