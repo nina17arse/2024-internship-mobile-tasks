@@ -1,0 +1,35 @@
+name: flutter_application_5
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.4.4 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  google_fonts: 6.2.1
+  image_picker: ^1.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/shoes.jpg
+    - assets/icons8-notification-bell-48.png
+    - assets/icons8-notification-bell-24.png
+fonts:
+    - family: Poppins
+      fonts:
+        - asset: fonts/Poppins-Regular.otf
+    # - family: ATOP
+    #   fonts:
+    #     - asset: fonts/
+        
+          
+    
