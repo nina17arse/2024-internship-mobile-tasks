@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'search.dart';
 import 'package:image_picker/image_picker.dart';
 import '../extra/icon_img.dart';
+import 'package:page_transition/page_transition.dart';
 
 
 class homePage extends StatefulWidget {
@@ -26,7 +27,17 @@ class _homePageState extends State<homePage> {
           shape: CircleBorder(),
           backgroundColor: Color.fromARGB(255, 63, 81, 243),
           child: Icon(Icons.add_rounded,color: Colors.white,size: 55),
-          onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=> AddUpdate(),),);},
+          onPressed: (){Navigator.push(context, PageTransition(
+                    alignment: Alignment.bottomCenter,
+                        curve: Curves.easeInOut,
+                        duration: Duration(milliseconds: 600),
+                        reverseDuration: Duration(milliseconds: 400),
+                        type: PageTransitionType.rightToLeft,
+                        child: AddUpdate(), 
+                        childCurrent: homePage()
+                    
+                  ),);
+},
         
           ),
       ),
@@ -96,7 +107,14 @@ class _homePageState extends State<homePage> {
                           borderRadius: BorderRadius.circular(10)
                         ),
                         padding: EdgeInsets.only(right: 2),
-                        child: IconButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=> searchPage(),),);}, icon: Icon(Icons.search),color: Color.fromARGB(255, 217, 217, 217),iconSize: 29))
+                        child: IconButton(onPressed:  (){Navigator.push(context, PageTransition(
+                    alignment: Alignment.bottomCenter,
+                        curve: Curves.easeInOut,
+                        duration: Duration(milliseconds: 1200),
+                        reverseDuration: Duration(milliseconds: 400),
+                        type: PageTransitionType.leftToRightPop,
+                        child: searchPage(), 
+                        childCurrent: homePage()),);}, icon: Icon(Icons.search),color: Color.fromARGB(255, 217, 217, 217),iconSize: 29))
                     ],
                 ),
             ),
@@ -111,7 +129,17 @@ class _homePageState extends State<homePage> {
                     shrinkWrap: true,
                     itemCount: 3, 
                     itemBuilder: (context,idx)=> GestureDetector(
-                      onTap: (){Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=> DetailsPage(),),);},
+                      onTap:  (){Navigator.push(context, PageTransition(
+                    alignment: Alignment.bottomCenter,
+                        curve: Curves.easeInOut,
+                        duration: Duration(milliseconds: 600),
+                        reverseDuration: Duration(milliseconds: 400),
+                        type: PageTransitionType.bottomToTopJoined,
+                        child: DetailsPage(), 
+                        childCurrent: homePage()
+                    
+                  ),);
+},
                       child: shoeCard(),
                     )),
                 ),
@@ -139,10 +167,10 @@ Widget shoeCard(){
                 topLeft: Radius.circular(20.0),
                 topRight: Radius.circular(20.0)),
                 child:Image(
-          // height: 300.0,
-          image: AssetImage('assets/shoes.jpg'),
-        
-        ),
+                          // height: 300.0,
+                          image: AssetImage('assets/shoes.jpg'),
+                        
+                        ),
         ),
         
         Row(

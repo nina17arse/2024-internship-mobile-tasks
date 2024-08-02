@@ -1,21 +1,5 @@
 import 'package:flutter/material.dart';
 
-// class SearchFunc extends StatefulWidget {
-//   const SearchFunc({ Key? key }) : super(key: key);
-
-//   @override
-//   _SearchFuncState createState() => _SearchFuncState();
-// }
-
-// class _SearchFuncState extends State<SearchFunc> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-      
-//     );
-//   }
-// }
-
 class SearchFunc extends SearchDelegate{
   List<String> terms=[
     'Derby',

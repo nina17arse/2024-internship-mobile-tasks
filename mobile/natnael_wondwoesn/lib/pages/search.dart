@@ -50,12 +50,23 @@ class _searchPageState extends State<searchPage> {
                       child: SizedBox(
                         width: 300,
                         height: 48,
-                        child: TextField(
-                          
-                          decoration: InputDecoration(
-                            
-                            hintText: "Leather",
-                          ), 
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Color.fromRGBO(217, 217, 217, 1)),
+                            borderRadius: BorderRadius.all(Radius.circular(8))
+                            ),
+                          child: const Expanded(
+              
+                            child: TextField(
+                      
+                              decoration: InputDecoration(
+                                suffixIcon: Icon(Icons.arrow_forward),
+                                border: InputBorder.none,
+                                hintText: "  Leather",
+                                
+                              ), 
+                            ),
+                          ),
                         ),
                       ) 
                     ),
@@ -63,46 +74,51 @@ class _searchPageState extends State<searchPage> {
                       width: 7,
                     ),
                     Container(
+
                       decoration: BoxDecoration(
                         color: Color.fromRGBO(63, 81, 243, 1),
                         
                       ),
                       child: SizedBox(
-                        height: 60,
-                        width: 60,
+                        height: 48,
+                        width: 48,
                         
                           child: Container(
                             decoration: BoxDecoration(
-                              // border: Border.all(width: 2,color: Color.fromRGBO(63, 81, 243, 1)),
-                              borderRadius: BorderRadius.circular(8)
+                              border: Border.all(width: 4,color: Color.fromRGBO(63, 81, 243, 1)),
+                              borderRadius: BorderRadius.all(Radius.circular(8))
                             ),
-                            child: IconButton(onPressed: (){}, icon: Icon(Icons.filter_list,color: Colors.white,))),
+                            child: IconButton(
+                              onPressed: (){
+                                showModalBottomSheet
+                                (context: context, 
+                                builder: (BuildContext context){
+                                  return const SizedBox(
+                                      height: 338,
+                                      child: const about_product());
+                                            
+                                });
+                              }, 
+                              icon: Icon(Icons.filter_list,color: Colors.white,))),
                         ),
                     ),
                     
                 
                   ],),
-                  SizedBox(height: 36, ),
+                  SizedBox(height:31),
                   Container(
                     margin: EdgeInsets.only(right: 32),
                     child: SizedBox(
-                    height: 300,
+                    height: MediaQuery.of(context).size.height,
                     child: ListView.builder(
                       shrinkWrap: true,
-                      itemCount: 2, 
+                      itemCount: 4, 
                       itemBuilder: (context,idx)=> GestureDetector(
                         onTap: (){Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=> DetailsPage(),),);},
                         child: shoeCard(),
                       )),
                                   ),
                   ),
-          
-                  Column(
-                    children: [
-                      SizedBox(
-                        height: 300,
-                        child: const about_product())
-                              ])
                     
               ],
             ),

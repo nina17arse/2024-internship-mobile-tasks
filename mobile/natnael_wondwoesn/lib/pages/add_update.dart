@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:flutter_application_5/pages/details.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../extra/resusetext.dart';
 import 'home.dart';
@@ -140,7 +141,7 @@ class _AddUpdateState extends State<AddUpdate> {
                                       foregroundColor: Colors.white,
                                       backgroundColor: Color(0xff3F51F3),
                                     ),
-                                  onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=> AddUpdate(),),);}, 
+                                  onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=> DetailsPage(),),);}, 
                                   child: Text("ADD",style: GoogleFonts.poppins(fontSize: 14,fontWeight: FontWeight.w500),)),
                                 ),
                   
