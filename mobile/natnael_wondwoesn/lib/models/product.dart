@@ -1,7 +1,9 @@
 //model
+import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:flutter/widgets.dart";
 import 'package:provider/provider.dart';
+import 'package:flutter/foundation.dart';
 
 
 class Product {
@@ -53,9 +55,9 @@ class ProductModel extends ChangeNotifier {
   ),Product(
       id:2,
       rating:4.1,
-    imagePath: 'assets/zachary-keimig-V_aqnVipk-s-unsplash.jpg',
-    name: 'Nike Lows',
-    description: '',
+    imagePath: 'assets/will.jpg',
+    name: 'Nike Pandas',
+    description: 'Nike released a special edition "Panda" sneaker collection in 2023, featuring black and white color schemes inspired by the popular black and white panda bears. The designs incorporated panda-themed details on classic Nike silhouettes like the Air Force 1 and Dunk Low. The collection was highly sought-after by sneaker enthusiasts.',
     category:'Men ' + "'"+ 's'+' shoes',
     price: 39.99,
   ),Product(
@@ -77,10 +79,16 @@ rating:4.1,
 
 
 
-  static void addProduct(Product product) {
+   void addProduct(Product product) {
     // product.id = id;
     id++;
     prd_list.add(product);
+    notifyListeners();
+  }
+
+   void removeProduct(Product product) {
+    prd_list.remove(product);
+    notifyListeners();
   }
 }
 

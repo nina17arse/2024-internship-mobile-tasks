@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_5/features/data/models/product.dart';
-import '../extra/resusetext.dart';
+import 'package:flutter_application_5/models/product.dart';
+import 'resusetext.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
 class ItemCard extends StatelessWidget {
-  ItemCard({super.key, required this.product});
+  final Product item;
+  ItemCard({super.key, required this.item});
 
-  Product product;
 
   @override
   Widget build(BuildContext context) {
@@ -15,20 +15,14 @@ class ItemCard extends StatelessWidget {
       color: Colors.white,
       clipBehavior: Clip.antiAlias,
       child: GestureDetector(
-        onTap: () => {
-          Navigator.pushNamed(
-            context,
-            '/detail',
-            arguments: product,
-          )
-        },
+        onTap: () {Navigator.pushNamed(context,'/detail', arguments: item);},
         child: Column(
           children: [
             AspectRatio(
               aspectRatio: 16 / 9,
               child: Image.asset(
-                      product.imagePath,
-                      fit: BoxFit.fitHeight,
+                      item.imagePath,
+                      fit: BoxFit.cover,
                     ),
             ),
             Container(
@@ -39,7 +33,7 @@ class ItemCard extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        product.name,
+                        item.name,
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -48,7 +42,7 @@ class ItemCard extends StatelessWidget {
                       ),
                       Spacer(),
                       Text(
-                        "\$${product.price}",
+                        "\$${item.price}",
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
@@ -61,7 +55,7 @@ class ItemCard extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "Men's shoes",
+                        "${item.category}",
                         style: TextStyle(
                           color: Color.fromARGB(255, 170, 170, 170),
                           fontSize: 12,
@@ -77,7 +71,7 @@ class ItemCard extends StatelessWidget {
                             size: 20,
                           ),
                           Text(
-                            "(4.0)",
+                            "(${item.rating})",
                             style: TextStyle(
                               color: Color.fromARGB(255, 170, 170, 170),
                               fontSize: 12,

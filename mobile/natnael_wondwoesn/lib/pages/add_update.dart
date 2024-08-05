@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
-import 'package:flutter_application_5/features/presentation/pages/details.dart';
+import 'package:flutter_application_5/pages/details.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_application_5/features/extra/resusetext.dart';
+import 'package:flutter_application_5/extra/resusetext.dart';
 import 'home.dart';
 
 

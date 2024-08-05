@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_5/features/data/models/product.dart';
+import 'package:flutter_application_5/models/product.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
 class ProductView extends StatelessWidget {

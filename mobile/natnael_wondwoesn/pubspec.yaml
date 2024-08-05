@@ -31,6 +31,8 @@ flutter:
     - assets/zachary-keimig-V_aqnVipk-s-unsplash.jpg
     - assets/mike.jpg
     - assets/hightpop.jpg
+    - assets/will.jpg
+    
 fonts:
     - family: Poppins
       fonts:

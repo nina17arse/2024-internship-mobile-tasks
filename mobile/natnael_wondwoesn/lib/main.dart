@@ -1,14 +1,14 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:flutter_application_5/features/presentation//pages/add_update.dart';
-import 'package:flutter_application_5/features/presentation//pages/details.dart';
-import 'package:flutter_application_5/features/presentation//pages/home.dart';
-import 'package:flutter_application_5/features/presentation//pages/search.dart';
-import 'package:flutter_application_5/features/presentation/pages/update.dart';
+import 'package:flutter_application_5/pages/add_update.dart';
+import 'package:flutter_application_5/pages/details.dart';
+import 'package:flutter_application_5/pages/home.dart';
+import 'package:flutter_application_5/pages/search.dart';
+import 'package:flutter_application_5/pages/update.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
-import './features/data/models/product.dart';
+import 'models/product.dart';
 import 'package:provider/provider.dart';
 
 
@@ -23,6 +23,7 @@ void main() {
 
 
 class Main extends StatelessWidget {
+  
 const Main({ Key? key }) : super(key: key);
 
   @override
@@ -30,23 +31,27 @@ const Main({ Key? key }) : super(key: key);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
+      onGenerateRoute: (settings) {
+        if (settings.name == '/detail') {
+          final item = settings.arguments as Product;
+          return MaterialPageRoute(
+            builder: (context) {
+              return DetailsPage(item: item as Product);
+            },
+          );
+        }
+        // Handle other routes here
+        return null;
+      },
       routes: {
           '/home' : (context) => homePage(),
-          '/detail': (context) => DetailsPage(item: ProductModel.prd_list[2],),
+          
           '/add': (context) => AddUpdate(),
           '/search' : (context) => searchPage(),
           '/update' : (context) => UpdatePage(),
         },
       home: homePage(),
-      onGenerateRoute: (settings) {
-    switch (settings.name) {
-      case '/addUpdate':
-        return PageTransition(child: AddUpdate(), type: PageTransitionType.bottomToTopJoined);
-            break;
-      default:
-        return null;
-    }
-  },
+      
     );
   }
 }

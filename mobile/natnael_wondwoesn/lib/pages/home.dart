@@ -1,18 +1,18 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_5/features/presentation/pages/add_update.dart';
-import 'package:flutter_application_5/features/presentation/pages/details.dart';
+import 'package:flutter_application_5/pages/add_update.dart';
+import 'package:flutter_application_5/pages/details.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:flutter_application_5/features/extra/icon_img.dart';
+import 'package:flutter_application_5/extra/icon_img.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:flutter_application_5/features/data/models/product.dart';
-import 'package:flutter_application_5/features/extra/overflow_card.dart';
+import 'package:flutter_application_5/models/product.dart';
+import 'package:flutter_application_5/extra/overflow_card.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_application_5/features/presentation/pages/search.dart';
-import 'package:flutter_application_5/features/extra/resusetext.dart';
-import 'package:flutter_application_5/features/data/models/ext_product.dart';
+import 'package:flutter_application_5/pages/search.dart';
+import 'package:flutter_application_5/extra/resusetext.dart';
+import 'package:flutter_application_5/models/ext_product.dart';
 
 
 
@@ -24,6 +24,7 @@ class homePage extends StatefulWidget {
 }
 
 class _homePageState extends State<homePage> {
+  final prd = ProductModel();
  
   @override
   Widget build(BuildContext context) {
@@ -117,16 +118,20 @@ class _homePageState extends State<homePage> {
           ),
 
           
-            SizedBox(
-              child: SingleChildScrollView(
-                child: SizedBox(
-                    height: MediaQuery.of(context).size.height*0.8,
-                    child: ListView.builder(
-                     itemCount: ProductModel.prd_list.length,
-                    itemBuilder: (context, index) {
-                      return ProductView(item: ProductModel.prd_list[index]);
-                    },),
-                  ),
+            Consumer<ProductModel>(
+              builder: (context, prd, child) => Expanded(
+              child: SizedBox(
+                child: SingleChildScrollView(
+                  child: SizedBox(
+                      height: MediaQuery.of(context).size.height*0.8,
+                      child: ListView.builder(
+                       itemCount: ProductModel.prd_list.length,
+                      itemBuilder: (context, index) {
+                        return ItemCard(item: ProductModel.prd_list[index],);
+                      },),
+                    ),
+                ),
+              ),
               ),
             ),
              
