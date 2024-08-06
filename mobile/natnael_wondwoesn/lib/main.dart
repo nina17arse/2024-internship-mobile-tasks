@@ -45,7 +45,6 @@ const Main({ Key? key }) : super(key: key);
       },
       routes: {
           '/home' : (context) => homePage(),
-          
           '/add': (context) => AddUpdate(),
           '/search' : (context) => searchPage(),
           '/update' : (context) => UpdatePage(),

@@ -108,11 +108,22 @@ class _searchPageState extends State<searchPage> {
                 
                   ],),
                   SizedBox(height:31),
-                  ListView.builder(
-                     itemCount: ProductModel.prd_list.length,
-                    itemBuilder: (context, index) {
-                      return ProductView(item: ProductModel.prd_list[index]);
-                    },),
+                  Consumer<ProductModel>(
+                    builder: (context, prd, child) => Expanded(
+                    child: SizedBox(
+                      child: SingleChildScrollView(
+                        child: SizedBox(
+                            height: MediaQuery.of(context).size.height*0.8,
+                            child: ListView.builder(
+                            itemCount: prd.prd_list.length,
+                            itemBuilder: (context, index) {
+                              return ItemCard(item: prd.prd_list[index],);
+                            },),
+                          ),
+                      ),
+                    ),
+                    ),
+                  ),
           //         Consumer<ProductModel>(
           // builder: (context, cart, child) {
           //   return ListView(

@@ -125,9 +125,9 @@ class _homePageState extends State<homePage> {
                   child: SizedBox(
                       height: MediaQuery.of(context).size.height*0.8,
                       child: ListView.builder(
-                       itemCount: ProductModel.prd_list.length,
+                       itemCount: prd.prd_list.length,
                       itemBuilder: (context, index) {
-                        return ItemCard(item: ProductModel.prd_list[index],);
+                        return ItemCard(item: prd.prd_list[index],);
                       },),
                     ),
                 ),
