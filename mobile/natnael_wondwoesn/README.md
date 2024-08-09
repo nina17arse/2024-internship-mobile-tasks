@@ -59,6 +59,18 @@ The app will be launched on your connected device or emulator.
 - Implements a beautiful UI design.
 - Utilizes the Google Fonts package for custom fonts.
 - Responsive layout for different screen sizes.
+## Updates on August 8 2024
+Completed Tasks
+Task 9: Domain Layer of Flutter Project
+
+Completed the implementation of the domain layer.
+Successfully performed all CRUD operations tests for the domain layer.
+Task 10: Domain Layer Enhancements
+
+Completed two sub-tasks:
+Implemented the fromJson method.
+Implemented the toJson method.
+Conducted and passed respective tests for both fromJson and toJson methods.
 
 ## Contributing
 
