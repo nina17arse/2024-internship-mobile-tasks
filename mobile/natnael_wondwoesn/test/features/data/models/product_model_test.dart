@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter_application_5/features/product/data/models/product_models.dart';
 import 'package:flutter_application_5/features/product/domain/entities/product_entity.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:dartz/dartz.dart';
 
 import '../../../helpers/read_json.dart';
 

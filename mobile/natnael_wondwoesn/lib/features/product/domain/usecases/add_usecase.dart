@@ -1,17 +1,18 @@
 import 'package:dartz/dartz.dart';
 import '../../../../core/errors/failure/failures.dart';
 import '../../../../core/usecases/usecases.dart';
+import '../../data/models/product_models.dart';
 import '../repositories/product_repository.dart';
 import 'package:equatable/equatable.dart';
 import '../entities/product_entity.dart';
 
-class AddProductUseCase  implements UseCase<String, ProductEntity> {
+class AddProductUseCase  implements UseCase<String, ProductModel> {
   final ProductRepository abstractProductRepository;
 
   AddProductUseCase(this.abstractProductRepository);
 
   @override
-  Future<Either<Failure, String>> call(ProductEntity product) async {
+  Future<Either<Failure, String>> call(ProductModel product) async {
     return await abstractProductRepository.addProduct(
         product.name, product.description, product.price.toDouble(), product.imagePath
     );
@@ -33,6 +34,4 @@ class ProductParams extends Equatable {
 class AddProductParams  {
   final ProductEntity product;
   const AddProductParams({required this.product});
-
-  
 }
