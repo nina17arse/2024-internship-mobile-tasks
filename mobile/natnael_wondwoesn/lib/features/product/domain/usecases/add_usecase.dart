@@ -6,16 +6,15 @@ import '../repositories/product_repository.dart';
 import 'package:equatable/equatable.dart';
 import '../entities/product_entity.dart';
 
-class AddProductUseCase  implements UseCase<String, ProductModel> {
+class AddProductUseCase  implements UseCase<ProductModel, ProductModel> {
   final ProductRepository abstractProductRepository;
 
   AddProductUseCase(this.abstractProductRepository);
 
   @override
-  Future<Either<Failure, String>> call(ProductModel product) async {
-    return await abstractProductRepository.addProduct(
-        product.name, product.description, product.price.toDouble(), product.imagePath
-    );
+  Future<Either<Failure, ProductModel>> call(ProductModel product) async {
+    return await abstractProductRepository.addProduct(product); 
+
   }
 }
 

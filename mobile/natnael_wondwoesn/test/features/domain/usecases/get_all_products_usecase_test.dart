@@ -22,8 +22,8 @@ void main(){
       id: '1',
       name: 'Test Product',
       description: 'Test Description',
-      price: 10.0,
-      imagePath: ""
+      price: 10,
+      imagePath: null
     )
   ];
 

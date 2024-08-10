@@ -47,14 +47,14 @@ class _AddUpdateState extends State<AddUpdate> {
   Widget build(BuildContext context) {
     void addProduct() {
       Product newProduct = Product(
-          id: ProductModel.id,
-          rating: ProductModel.rating,
+          id: ProductM.id,
+          rating: ProductM.rating,
           imagePath:  'assets/shoes.jpg',
           name: name_input.text,
           description: description_input.text,
           price: price_input.text,
           category: category_input.text);
-      ProductModel().addProduct(newProduct);
+      ProductM().addProduct(newProduct);
       Navigator.pushNamed(context, '/home');
     }
     return Scaffold(

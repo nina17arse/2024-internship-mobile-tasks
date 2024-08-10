@@ -29,7 +29,7 @@ class Product {
 
 
 
-class ProductModel extends ChangeNotifier {
+class ProductM extends ChangeNotifier {
 
   static int id = 4;
   static double rating = 4.5;

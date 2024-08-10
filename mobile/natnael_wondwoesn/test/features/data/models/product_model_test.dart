@@ -13,8 +13,7 @@ void main(){
     name: 'PC', 
     description: 'long description', 
     price: 123, 
-    imagePath: 'https://res.cloudinary.com/g5-mobile-track/image/upload/v1722855993/images/soyhb68osjiemyy2btte.png'
-    );
+    imagePath: null,);
 
   
 

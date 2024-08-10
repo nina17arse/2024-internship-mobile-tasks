@@ -108,7 +108,7 @@ class _searchPageState extends State<searchPage> {
                 
                   ],),
                   SizedBox(height:31),
-                  Consumer<ProductModel>(
+                  Consumer<ProductM>(
                     builder: (context, prd, child) => Expanded(
                     child: SizedBox(
                       child: SingleChildScrollView(
@@ -124,7 +124,7 @@ class _searchPageState extends State<searchPage> {
                     ),
                     ),
                   ),
-          //         Consumer<ProductModel>(
+          //         Consumer<ProductM>(
           // builder: (context, cart, child) {
           //   return ListView(
           //                   children: allCards,

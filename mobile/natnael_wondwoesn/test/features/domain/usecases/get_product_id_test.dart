@@ -20,7 +20,7 @@ void main(){
     name: 'Test Product',
     description: 'Test Description',
     price: 10.0,
-    imagePath: 'test.jpg',
+    imagePath: null,
   );
   const tId = '1';
 

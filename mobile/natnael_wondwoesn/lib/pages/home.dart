@@ -24,7 +24,7 @@ class homePage extends StatefulWidget {
 }
 
 class _homePageState extends State<homePage> {
-  final prd = ProductModel();
+  final prd = ProductM();
  
   @override
   Widget build(BuildContext context) {
@@ -118,7 +118,7 @@ class _homePageState extends State<homePage> {
           ),
 
           
-            Consumer<ProductModel>(
+            Consumer<ProductM>(
               builder: (context, prd, child) => Expanded(
               child: SizedBox(
                 child: SingleChildScrollView(

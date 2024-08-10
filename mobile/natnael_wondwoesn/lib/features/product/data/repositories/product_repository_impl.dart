@@ -6,6 +6,8 @@ import '../../domain/repositories/product_repository.dart';
 import '../data_sources/local_data_source/local_data_source.dart';
 import 'package:flutter_application_5/core/network/network_info.dart';
 
+import '../models/product_models.dart';
+
 
 class ProductRepositoryImpl implements ProductRepository {
   final ProductRemoteDataSourceImpl remoteDataSource;
@@ -19,7 +21,7 @@ class ProductRepositoryImpl implements ProductRepository {
      if(await networkInfo.isConnected){
        try{
         final products = await remoteDataSource.getProducts();
-        localDataSource.addProduct(products);
+        // localDataSource.addProduct(ProductModel(id: id, name: name, description: description, price: price, imagePath: imagePath));
         return Right(products);
       } on ServerFailure {
         return Left(ServerFailure("Server Failure"));
@@ -45,7 +47,7 @@ class ProductRepositoryImpl implements ProductRepository {
         localDataSource.addProduct(product);
         return Right(product);
       } on ServerFailure {
-        return Left(ServerFailure());
+        return Left(ServerFailure('Server: Failed to get product'));
       }
      }else {
       try{
@@ -58,10 +60,10 @@ class ProductRepositoryImpl implements ProductRepository {
   }// Get Product impl
 
   @override
-  Future<Either<Failure,String>> addProduct(String name, String description, double price, String imageUrl) async {
+  Future<Either<Failure,ProductModel>> addProduct(ProductModel product) async {
     try{
-        final products = await remoteDataSource.addProduct(product);
-        return Right(products);
+        final results = await remoteDataSource.addProduct(product);
+        return Right(results);
       } on Exception {
         return Left(ServerFailure('Server: Failed to add product'));
       } 
@@ -71,10 +73,10 @@ class ProductRepositoryImpl implements ProductRepository {
 
 
   @override
-  Future<Either<Failure,String>> updateProduct(String productId, String name, String description, double price, String imageUrl) async {
+  Future<Either<Failure,ProductModel>> updateProduct(ProductModel product) async {
     try{
-        final products = await remoteDataSource.updateProduct();
-        return Right(products);
+        final result = await remoteDataSource.updateProduct(product);
+        return Right(result);
       } on Exception {
         return Left(ServerFailure('Server: Failed to update product'));
       } 

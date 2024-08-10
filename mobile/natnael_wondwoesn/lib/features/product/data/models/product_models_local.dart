@@ -4,12 +4,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_application_5/features/product/domain/entities/product_entity.dart';
 import 'package:image_picker/image_picker.dart';
 
-class ProductModel extends ProductEntity {
-  const ProductModel({
-    required String id,
+import '../../domain/entities/product_entity_local.dart';
+
+class ProductModel_Local extends ProductEntity_Local {
+  const ProductModel_Local({
+    // required String id,
       required String name, required String description, required int price, required File? imagePath,
       
-    }) : super(id:id, name:  name, description: description, price: price, imagePath: imagePath);
+    }) : super(name:  name, description: description, price: price, imagePath: imagePath);
 
     Future<File?> _pickImage() async {
   final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -21,23 +23,22 @@ class ProductModel extends ProductEntity {
 }
 
 
-  factory ProductModel.fromJson(Map<String, dynamic> json) {
-    return ProductModel(
-      id : json['id'],// TO be deleteed
+  factory ProductModel_Local.fromJson(Map<String, dynamic> json) {
+    return ProductModel_Local(
+        // TO be deleteed
       name: json['name'],
       description: json['description'],
-      price: int.parse(json['price']),
+      price: json['price'],
       imagePath: json['imageUrl'],
     );
   }
 
   Map<String, String> toJson() {
     return {
-      'id': id,
       'name': name,
       'price': price.toString(),
       'description': description,
-      'imagePath': imagePath.toString(),
+      // 'imagePath': imagePath,
     };
   }
   
