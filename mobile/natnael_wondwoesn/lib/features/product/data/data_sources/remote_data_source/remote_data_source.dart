@@ -6,7 +6,7 @@ import  'package:http/http.dart' as http;
 import 'package:flutter_application_5/features/product/data/models/product_models.dart';
 import '../../../../../core/errors/failure/failures.dart';
 import '../../../domain/entities/product_entity.dart';
-
+import 'dart:io';
 
 
 abstract class ProductRemoteDataSource {
@@ -15,7 +15,7 @@ abstract class ProductRemoteDataSource {
   Future<ProductModel> addProduct(ProductModel product);
   Future<String> deleteProduct(String id);
   Future<ProductModel> updateProduct(ProductModel product);
-  Future<List<ProductEntity>> getProducts();
+  Future<List<ProductModel>> getProducts();
  
 }
 
@@ -33,8 +33,11 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
     }
   }
 
-  Future<List<ProductEntity>> getProducts() async {
-    final response = await client.get(Uri.parse(Urls.getProducts()));
+
+  @override
+  Future<List<ProductModel>> getProducts() async {
+    var url = 'https://g5-flutter-learning-path-be.onrender.com/api/v1/products';
+    final response = await client.get(Uri.parse(url));
     if (response.statusCode == 200) {
       return (jsonDecode(response.body)['data'] as List)
           .map((e) => ProductModel.fromJson(e))
@@ -43,16 +46,30 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
       throw Exception('Failed to load data');
     }
   }
+  // Future<List<ProductEntity>> getProducts() async {
+  //   var url =Uri.parse('https://g5-flutter-learning-path-be.onrender.com/api/v1/products');
+  //   final response = await client.get(url);
+  //   print(response);
+  //   if (response.statusCode == 200) {
+  //     return (jsonDecode(response.body)['data'] as List)
+  //         .map((e) => ProductModel.fromJson(e))
+  //         .toList();
+  //   } else {
+  //     throw Exception('Failed to load data');
+  //   }
+  // }
 
   @override
   Future<ProductModel> addProduct(ProductModel product) async {
     var request = http.MultipartRequest('POST', Uri.parse(Urls.addProduct(product)));
+    print(request);
 
     request.fields.addAll(product.toJson());
 
-    request.files.add(await http.MultipartFile.fromPath('image', 'Temporary file path'));//
+    // request.files.add(await http.MultipartFile.fromPath('image', '/home/wonde/Pictures/photo_2024-07-30_10-50-46.jpg'));
 
     var response = await request.send();
+    print(response);
 
     if (response.statusCode == 201) {
       var responseBody = await response.stream.bytesToString();

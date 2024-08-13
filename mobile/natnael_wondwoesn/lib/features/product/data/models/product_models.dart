@@ -11,14 +11,7 @@ class ProductModel extends ProductEntity {
       
     }) : super(id:id, name:  name, description: description, price: price, imagePath: imagePath);
 
-    Future<File?> _pickImage() async {
-  final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
-
-  if (pickedFile != null) {
-    return File(pickedFile.path);
-  }
-  return null;
-}
+    
 
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {

@@ -2,9 +2,9 @@ import "package:flutter/material.dart";
 import 'package:flutter_application_5/extra/overflow_card.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_application_5/extra/search_func.dart';
-import 'package:flutter_application_5/pages/home.dart';
+import 'package:flutter_application_5/features/product/presentation/pages/home.dart';
 import 'package:flutter_application_5/extra/resusetext.dart';
-import 'package:flutter_application_5/pages/details.dart';
+import 'package:flutter_application_5/features/product/presentation/pages/details.dart';
 import 'package:flutter_application_5/models/product.dart';
 import 'package:flutter_application_5/models/ext_product.dart';
 

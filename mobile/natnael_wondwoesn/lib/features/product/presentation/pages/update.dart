@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_5/pages/home.dart';
+import 'package:flutter_application_5/features/product/presentation/pages/home.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_application_5/extra/resusetext.dart';

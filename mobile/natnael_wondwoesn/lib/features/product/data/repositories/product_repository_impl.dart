@@ -21,7 +21,6 @@ class ProductRepositoryImpl implements ProductRepository {
      if(await networkInfo.isConnected){
        try{
         final products = await remoteDataSource.getProducts();
-        // localDataSource.addProduct(ProductModel(id: id, name: name, description: description, price: price, imagePath: imagePath));
         return Right(products);
       } on ServerFailure {
         return Left(ServerFailure("Server Failure"));

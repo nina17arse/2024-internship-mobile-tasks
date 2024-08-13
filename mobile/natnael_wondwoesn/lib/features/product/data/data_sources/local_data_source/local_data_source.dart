@@ -57,18 +57,15 @@ class ProductLocalDataSourceImpl extends ProductLocalDataSource {
 
   @override
   Future<List<ProductEntity>> getProducts() async {
-    final keys = sharedPreferences.getKeys();
-    final productKeys = keys.where((key) => key.startsWith('PRODUCT_'));
-    final products = productKeys.map((key) {
-      final jsonString = sharedPreferences.getString(key);
-      if (jsonString != null) {
-        // print(jsonString);
-        return ProductModel.fromJson(jsonDecode(jsonString));
-      } else {
-        throw Exception('Product not found');
+    final List<ProductEntity> products = [];
+    sharedPreferences.getKeys().forEach((key) {
+      if (key.contains('PRODUCT_')) {
+        final jsonString = sharedPreferences.getString(key);
+        if (jsonString != null) {
+          products.add(ProductModel.fromJson(jsonDecode(jsonString)));
+        }
       }
-    }).toList();
-
+    });
     return products;
   }// Needs to be fixed
 }
