@@ -4,11 +4,13 @@ import 'package:ecommerce_app_ca_tdd/features/product/data/models/product_models
 import 'package:ecommerce_app_ca_tdd/features/user_auth/data/models/user_access.dart';
 import 'package:ecommerce_app_ca_tdd/features/user_auth/data/models/user_model.dart';
 import 'package:ecommerce_app_ca_tdd/features/user_auth/presentation/bloc/get_user/get_user_bloc.dart';
+import 'package:ecommerce_app_ca_tdd/features/user_auth/presentation/bloc/get_user/get_user_event.dart';
 import 'package:ecommerce_app_ca_tdd/features/user_auth/presentation/bloc/get_user/get_user_state.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_app_ca_tdd/features/product/presentation/pages/add_update.dart';
 import 'package:ecommerce_app_ca_tdd/features/product/presentation/pages/details.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ecommerce_app_ca_tdd/extra/icon_img.dart';
@@ -35,8 +37,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  
+  
+
+
   @override
   Widget build(BuildContext context) {
+    Future<void> _refresh() {
+      context.read<HomeBloc>().add(GetProductsEvent());
+      context.read<GetUserBloc>().add(GetUserInfoEvent());
+    
+  
+  return  Future.delayed(Duration(seconds: 3));}
+    
     const maxNum = 10.0;
     return Scaffold(
       backgroundColor: Colors.white,
@@ -120,11 +133,33 @@ class _HomePageState extends State<HomePage> {
                         border: Border.all(
                             color: Color.fromRGBO(221, 221, 221, 1), width: 2),
                         borderRadius: BorderRadius.circular(9)),
-                    child: Image(
-                        width: 40,
-                        height: 40,
-                        image: AssetImage(
-                            'assets/icons8-notification-bell-24.png')))
+                          child: GestureDetector(
+                              onTap: (){
+                                  showDialog(
+                                      context: context, 
+                                      builder: (context)=> AlertDialog(
+                                        title: Text("Are you sure you want to logout ?",style: GoogleFonts.poppins(fontSize: 15),),
+                                        actions: [
+                                          TextButton(onPressed: (){
+                                            Navigator.pop(context);
+                                          }, child: Text("Cancel")),
+                                          TextButton(
+                                            onPressed: (){
+                                              logOut();
+                                              Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => true);
+                                            },
+                                            child: Text("Log-Out")
+                                            )
+                                        ],
+                                                                  )
+                                                                );
+                              },
+                      child: Image(
+                          width: 40,
+                          height: 40,
+                          image: AssetImage(
+                              'assets/icons8-notification-bell-24.png')),
+                    ))
               ],
             ),
 
@@ -184,18 +219,21 @@ class _HomePageState extends State<HomePage> {
                       child: SingleChildScrollView(
                         child: SizedBox(
                           height: MediaQuery.of(context).size.height * 0.8,
-                          child: ListView.builder(
-                            itemCount: state.products.length,
-                            itemBuilder: (context, index) {
-                              return GestureDetector(
-                                  onTap: () {
-                                    Navigator.pushNamed(context, '/detail',
-                                        arguments: state.products[index]);
-                                  },
-                                  child: OverflowCard(
-                                    product: state.products[index],
-                                  ));
-                            },
+                          child: RefreshIndicator(
+                            onRefresh:_refresh,
+                            child: ListView.builder(
+                              itemCount: state.products.length,
+                              itemBuilder: (context, index) {
+                                return GestureDetector(
+                                    onTap: () {
+                                      Navigator.pushNamed(context, '/detail',
+                                          arguments: state.products[index]);
+                                    },
+                                    child: OverflowCard(
+                                      product: state.products[index],
+                                    ));
+                              },
+                            ),
                           ),
                         ),
                       ),
@@ -221,6 +259,8 @@ Future<String?> getAccessToken() async {
   var token = prefs.getString('access_token');
   return token.toString();
 }
+
+
 
 
 class OverflowCard extends StatelessWidget {
@@ -321,5 +361,20 @@ class CustomBlocObserver extends BlocObserver {
     super.onChange(bloc, change);
     print('Current State: ${change.currentState}');
     print('Next State: ${change.nextState}');
+  }
+}
+
+Future<void> logOut() async {
+  SharedPreferences remove = await SharedPreferences.getInstance();
+  remove.remove('access_token');
+}
+Future<bool?> checkToken() async {
+  SharedPreferences remove = await SharedPreferences.getInstance();
+  var result = remove.getString('access_token');
+  if (result != null){
+    return false;
+  }else{
+  return true;
+
   }
 }

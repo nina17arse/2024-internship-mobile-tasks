@@ -133,13 +133,13 @@ class _AddUpdateState extends State<AddUpdate> {
                   if (state is ProductLoading){
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
+                          backgroundColor: Colors.white,
                           content: Row(
                             children: [
-                              Text('Loading...'),
-                              CircularProgressIndicator(),
+                              Text('Please Wait...',style: GoogleFonts.poppins(color: Colors.black),),
                             ],
                           ),
-                          duration: Duration(seconds: 3),
+                          duration: Duration(seconds: 5),
                         ),
                       );
             
@@ -160,10 +160,11 @@ class _AddUpdateState extends State<AddUpdate> {
                     SnackBar(
                       backgroundColor: Colors.black,
                   content: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    // 
                     children: [
                       Icon(Icons.thumb_up_rounded,color: Colors.yellow,),
-                      Text("Succesfully Added !!!!",style: TextStyle(color: Colors.black),),
+                      SizedBox(width: 10,),
+                      Text("Succesfully Added !!!!",style: TextStyle(color: Colors.white),),
                     ],
                   ),
                       

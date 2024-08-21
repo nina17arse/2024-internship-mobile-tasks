@@ -98,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         'ECOM',
                         style: GoogleFonts.caveatBrush(
                             fontSize: 48,
-                            fontWeight: FontWeight.w400,
+                            fontWeight: FontWeight.w600,
                             color: Color.fromRGBO(63, 81, 243, 1)),
                       ),
                     ),

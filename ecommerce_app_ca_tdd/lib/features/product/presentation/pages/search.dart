@@ -1,5 +1,7 @@
 import 'package:ecommerce_app_ca_tdd/features/product/presentation/bloc/home_bloc.dart';
 import 'package:ecommerce_app_ca_tdd/features/product/presentation/bloc/home_event.dart';
+import 'package:ecommerce_app_ca_tdd/features/user_auth/presentation/bloc/get_user/get_user_bloc.dart';
+import 'package:ecommerce_app_ca_tdd/features/user_auth/presentation/bloc/get_user/get_user_event.dart';
 import "package:flutter/material.dart";
 import 'package:ecommerce_app_ca_tdd/extra/overflow_card.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,6 +24,13 @@ class searchPage extends StatefulWidget {
 }
 
 class _searchPageState extends State<searchPage> {
+      Future<void> _refresh() {
+      context.read<HomeBloc>().add(GetProductsEvent());
+      
+    
+  
+  return  Future.delayed(Duration(seconds: 3));}
+    
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +39,7 @@ class _searchPageState extends State<searchPage> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              IconButton(onPressed: () { Navigator.pop(context);}, icon: Icon(Icons.arrow_back_ios_new,color: Color.fromARGB(255, 63, 81, 243),size: 20,)),
+              IconButton(onPressed: () { Navigator.pushNamed(context,'/home');}, icon: Icon(Icons.arrow_back_ios_new,color: Color.fromARGB(255, 63, 81, 243),size: 20,)),
               const Center(
                 child: Text("Search  Product"),
               ),
@@ -114,39 +123,36 @@ class _searchPageState extends State<searchPage> {
                   ],),
                   SizedBox(height:31),
                    BlocBuilder<HomeBloc, HomeState>(
-              builder: (context, state) {
-                if (state is HomeLoading) {
-                  return Center(
-                    child: CircularProgressIndicator());
-                } else if (state is HomeFailure) {
-                  return SnackBar(
-                    content: Text(state.message),);
-                }else if (state is HomeLoaded) {
-                  return RefreshIndicator(
-                    onRefresh: () async {
-                      final HomeBloc homeBloc = Provider.of<HomeBloc>(context);
-                      homeBloc..add(GetProductsEvent());
-                    },
-                    child: Expanded(
-                    child: SizedBox(
-                      child: SingleChildScrollView(
-                        child: SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.8,
-                          child: ListView.builder(
-                            itemCount: state.products.length,
-                            itemBuilder: (context, index) {
-                              return GestureDetector(
-                                onTap: () {
-                                Navigator.pushNamed(context, '/detail',arguments: state.products[index]);},
-                                child: OverflowCard(product: state.products[index],)
-                              );
-                            },
+                  builder: (context, state) {
+                    if (state is HomeLoading) {
+                      return Center(
+                        child: CircularProgressIndicator());
+                    } else if (state is HomeFailure) {
+                      return SnackBar(
+                        content: Text(state.message),);
+                    }else if (state is HomeLoaded) {
+                      return Expanded(
+                      child: SizedBox(
+                        child: SingleChildScrollView(
+                          child: SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.8,
+                            child: RefreshIndicator(
+                              onRefresh: _refresh,
+                              child: ListView.builder(
+                                itemCount: state.products.length,
+                                itemBuilder: (context, index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                    Navigator.pushNamed(context, '/detail',arguments: state.products[index]);},
+                                    child: OverflowCard(product: state.products[index],)
+                                  );
+                                },
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                                    ),
-                  );
+                                      );
                 }
                 return Container(); // Add a return statement at the end
               },

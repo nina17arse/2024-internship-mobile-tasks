@@ -25,12 +25,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   TextEditingController confirm_password_input = TextEditingController();
 
-  bool passwordVisible = false;
+  bool passwordVisible = true;
 
-  bool confirmpasswordVisible = false;
-  @override
+  bool confirmpasswordVisible = true;
+  bool isChecked = false;
+  @override 
   Widget build(BuildContext context) {
-    bool isChecked = false;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -76,7 +76,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       body: SafeArea(
         child: BlocConsumer<SignUpBloc, SignUpState>(
           listener: (context, state) {
-            if (state is SignUpLoaded) {
+            if (state is SignUpLoaded && state.message != 'Authentication Failed') {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   backgroundColor: Colors.green,
@@ -105,11 +105,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
               );
             }
-            else if (state is SignUpFailure) {
+            else if (state is SignUpLoaded && state.message == 'Authentication Failed') {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   backgroundColor: Colors.red,
-                  content: Text(state.error),
+                  content: Text(state.message),
                   duration: Duration(seconds: 5),
                 ),
               );
@@ -280,14 +280,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     Row(
                       children: [
-                        Checkbox(
-                            checkColor: Colors.blue,
-                            value: isChecked,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                isChecked = value!;
-                              });
-                            }),
+                        SizedBox(
+                          child: Checkbox(
+                              activeColor: Colors.blue,
+                              value: isChecked,
+                              onChanged: (value) {
+                                setState(() {
+                                  isChecked = value!;
+                                });
+                              }),
+                        ),
                         SizedBox(
                           width: 2,
                         ),
@@ -331,13 +333,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 name: name_input.text,
                                 email: email_input.text,
                                 password: password_input.text);
-                                if (name_input.text.isEmpty || email_input.text.isEmpty || password_input.text.isEmpty || confirm_password_input.text.isEmpty) {
+                                if (name_input.text.isEmpty || email_input.text.isEmpty || password_input.text.isEmpty || confirm_password_input.text.isEmpty ) {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
                                           content: Text('All fields are required'),
                                           duration: Duration(seconds: 10),
                                         ),
-                                );}
+                                );}else if (!email_input.text.contains('@')|| !email_input.text.contains('.com')){
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text('Please Enter Valid Email Address'),
+                                              duration: Duration(seconds: 5),
+                                            ),
+                                    );
+                                  
+                                  
+                                }
                                 else if (password_input.text.length < 8) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
@@ -345,6 +356,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     duration: Duration(seconds: 10),
                                   ),
                                 );
+                                }else if (isChecked!=true){
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text('Please Check The Checkbox'),
+                                    duration: Duration(seconds: 4),
+                                  ),
+                                );
+
                                 }
                               else if (password_input.text != confirm_password_input.text) {
                                 ScaffoldMessenger.of(context).showSnackBar(

@@ -113,9 +113,10 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
     
     request.files.add(await http.MultipartFile.fromPath('image', product.imagePath,contentType: MediaType("image","jpg")));
 
-    print(temp2);
     
-    request.headers['Authorization'] = temp2;
+    
+    request.headers['Authorization'] = 'Bearer $temp2';
+    
 
     
 
@@ -151,21 +152,22 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
 
   @override
   Future<String> updateProduct(ProductModel product) async {
-    var url = 'https://g5-flutter-learning-path-be.onrender.com/api/v2/products/';
+    var url = 'https://g5-flutter-learning-path-be.onrender.com/api/v2/products/${product.id}';
     var temp1 = await SharedPreferences.getInstance();
     var temp2 = temp1.getString('access_token');
     var temp = product.toJson();
-    temp.remove('imagePath');
+    
     
 
-
+    print(temp);
 
     var headers = {
       'Authorization': 'Bearer $temp2',
-      'Content-Type': 'application/json',
     };
 
-    var response = await client.put(Uri.parse(url+product.id),headers: headers,body: temp);
+    var response = await client.put(Uri.parse(url),headers: headers,body: temp);
+
+    print(response.statusCode);
     
 
 
