@@ -20,14 +20,12 @@ class ProductEntity_local extends Equatable {
   List<Object?> get props => [id,name, description, price,imagePath];
 
 
-  Map<String, String> toJson() {
-    return {
-      'name': name,
-      'price': price.toString(),
-      'description': description,
-      'imagePath': imagePath,
-    };
-  }
+  Map<String, dynamic> toJson() => {
+        "name": name,
+        "description": description,
+        "price": price,
+        
+      };
 }
 // Compare this snippet from mobile/natnael_wondwoesn/lib/features/product/data/repositories/product_repository.dart:
 // import 'package:dartz/dartz.dart';

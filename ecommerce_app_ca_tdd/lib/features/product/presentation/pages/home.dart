@@ -306,7 +306,7 @@ class OverflowCard extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 8.0),
-                      Text(product.description,
+                      Text('Ecommerce Items',
                       overflow: TextOverflow.ellipsis,
                           style: GoogleFonts.poppins(
                               fontSize: 15.0,

@@ -45,7 +45,7 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
     if (response.statusCode == 200) {
       var ans = jsonDecode(response.body);
       print(ans);
-      return ProductModel.fromJson(ans['data']);
+      return ProductModel.fromJson(json.decode(ans['data']));
 
     } else {
       throw Exception('Failed to load data');
@@ -152,20 +152,25 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
 
   @override
   Future<String> updateProduct(ProductModel product) async {
-    var url = 'https://g5-flutter-learning-path-be.onrender.com/api/v2/products/${product.id}';
+    var url = 'https://g5-flutter-learning-path-be.onrender.com/api/v2/products/';
     var temp1 = await SharedPreferences.getInstance();
     var temp2 = temp1.getString('access_token');
-    var temp = product.toJson();
+    
+    var temp = jsonEncode(product.toJson());
+    
+
     
     
 
     print(temp);
+    print(url);
 
     var headers = {
       'Authorization': 'Bearer $temp2',
+      'Content-Type': 'application/json',
     };
 
-    var response = await client.put(Uri.parse(url),headers: headers,body: temp);
+    var response = await client.put(Uri.parse(url+product.id),headers: headers,body: temp);
 
     print(response.statusCode);
     

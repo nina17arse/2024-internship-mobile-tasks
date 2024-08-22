@@ -2,6 +2,7 @@
 
 import 'dart:math';
 import 'dart:io';
+import 'package:ecommerce_app_ca_tdd/extra/icon_img.dart';
 import 'package:ecommerce_app_ca_tdd/features/product/domain/entities/product_entity.dart';
 import 'package:ecommerce_app_ca_tdd/features/product/presentation/bloc/add/add_event.dart';
 import 'package:ecommerce_app_ca_tdd/features/product/presentation/bloc/add/add_state.dart';
@@ -106,11 +107,7 @@ class _AddUpdateState extends State<AddUpdate> {
                                     Icons.image_outlined,
                                     size: 50,
                                   )
-                                : SizedBox(
-                                    child: Image.file(
-                                    newImage!,
-                                    scale: 0.5,
-                                  ))),
+                                : ImagePickerIconButton()),
                       SizedBox(
                         height: 30,
                       ),
@@ -223,6 +220,7 @@ class _AddUpdateState extends State<AddUpdate> {
                           child: TextField(
                             controller: price_input,
                             decoration: InputDecoration(
+                              suffixIcon: Icon(Icons.attach_money),
                                 border: InputBorder.none,
                                 hintText: "",
                                 filled: true,

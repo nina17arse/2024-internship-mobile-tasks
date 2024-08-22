@@ -14,8 +14,8 @@ class UpdateBloc extends Bloc<UpdateEvent, UpdateState> {
 
   UpdateBloc(this.updateUsecase) : super(UpdateLoading()) {
     on<UpdateProductEvent>((event, emit) async {
-      emit((UpdateLoading()));
       var res = await updateUsecase.call(event.product);
+      emit((UpdateLoading()));
       res.fold((l)=> emit(UpdateFailiure(error: l.message)), (r) => emit(UpdateSuccess()));
 
     });

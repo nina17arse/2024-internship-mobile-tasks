@@ -26,13 +26,19 @@ class ProductModel extends ProductEntity_local {
     );
   }
 
-  Map<String, String> toJson() {
-    return {
-      'name': name,
-      'price': price.toString(),
-      'description': description,
-      'imagePath': imagePath.toString(),
-    };
-  }
+  // Map<String, dynamic> toJson() {
+  //   return {
+  //     'name': name,
+  //     'price': price.toString(),
+  //     'description': description,
+  //     'imageUrl': imagePath.toString(),
+  //   };
+  // }
+  Map<String, dynamic> toJson() => {
+        "name": name,
+        "description": description,
+        "price": price,
+        
+      };
   
 }

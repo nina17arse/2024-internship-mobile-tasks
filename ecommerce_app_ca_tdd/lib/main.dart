@@ -53,6 +53,7 @@ class Main extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return BlocProvider(
       create: (context) => sl.get<HomeBloc>()..add(GetProductsEvent()),
       child: MaterialApp(
